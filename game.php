@@ -43,17 +43,18 @@
 
     <body onload="initialize()">
 	<h1>Game of Craps</h1>
-	
+	<h2>Welcome, <?php echo $_SESSION["username"] ?> </h2>
 	<div id="menuBar">
 	    <a href="game.php">Home</a>
 <!-- add personal leaderboards/history -->
 	    <a href="leaderboards.php">Leaderboards</a>
 	    <a href="instructions.php">Instructions</a>
-	    <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
-		<input style="display:none;" type="text" value="logout" name="action">
-		    <input type="button" value="Logout" onclick="logout()">
-	    </form>
-
+	    <div id="logout"> 
+		    <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
+			<input style="display:none;" type="text" value="logout" name="action">
+			<input type="button" value="Logout" onclick="logout()">
+		    </form>
+	    </div>
 	</div>
 	
 <!-- thing for the input  -->
