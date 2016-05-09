@@ -12,7 +12,11 @@
     $userDetails = getUser($conn,$username);
     $row = $userDetails->fetch_array(MYSQLI_ASSOC);
 
-    if($_POST["method"] == "attemptRegister") { //if no results then ask to register
+    if($_POST["method"] == "logout") { 
+	session_destroy();
+	echo "success";
+	//maybe log something
+    } else if($_POST["method"] == "attemptRegister") { //if no results then ask to register
 	if($userDetails->num_rows == 0 && trim($username) != "" && ctype_space($username) == false) {
 	    echo "That account is available. Would you like to register it?";
 	} else {

@@ -7,7 +7,7 @@
 	session_destroy();
     }
     if(!isset($_SESSION['username'])){
-	header("Location:login.php");
+	header("Location:index.php");
     }
     include("config.php");
 
@@ -15,11 +15,30 @@
 ?>
     <head>
 	<title>
-<?php echo $companyName ?> - Play
+	    <?php echo $companyName ?> - Play
 	</title>
 
 	<link rel="stylesheet" type="text/css" href="gameStyle.css">
 	<script src="game.js"></script>
+	<script>
+	    function logout() {
+		//get game stats?
+                var xhttp = new XMLHttpRequest();
+		var result = "";
+                xhttp.onreadystatechange = function() {
+                    if (xhttp.readyState == 4 && xhttp.status == 200) {
+			result = xhttp.responseText;
+			if(result === "success") {
+			    window.location.replace("index.php");
+			}
+                    }
+                };
+                xhttp.open("POST", "login.php", true);
+		xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                xhttp.send("method=logout");
+            }
+	    
+	</script>
     </head>
 
     <body onload="initialize()">
@@ -32,7 +51,7 @@
 	    <a href="instructions.php">Instructions</a>
 	    <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
 		<input style="display:none;" type="text" value="logout" name="action">
-		<input type="submit" value="logout" >
+		    <input type="button" value="Logout" onclick="logout()">
 	    </form>
 
 	</div>
