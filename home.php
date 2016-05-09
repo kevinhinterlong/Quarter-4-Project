@@ -15,27 +15,20 @@
 ?>
     <head>
 	<title>
-	   <?php echo $companyName ?> - Leaderboards
+	    <?php echo $companyName ?> - Home
 	</title>
 
 	<link rel="stylesheet" type="text/css" href="gameStyle.css">
-	
 	<script type="text/javascript" src="login.js"></script>
     </head>
 
-    <body>
-	<h1>Game of Craps</h1>
+    <body onload="initialize()">
+	<h1>Home</h1>
+	<h2>Welcome, <?php echo $_SESSION["username"] ?> </h2>
 	<?php 
 	    include("menuBar.php");
 	?>	
-
-<!-- 
-    create database if not exists leaderboards
-    use database
-    create table if not exists
-    select * from table asc
-    for each value, print name and score
-    maybe show stats about leaderboards?    
--->
+	
     </body>
 </html>
+

@@ -4,7 +4,7 @@
     <head>
 	<?php include("config.php") ?>
 	<title>
-	<?php echo $companyName . " - Home" ?>
+	<?php echo $companyName; ?> - Login
 	</title>
 
 	<style>
@@ -18,33 +18,13 @@
 		display: block;
 	    }
 	</style>
-	<script>
-	    function attemptLogin() {
-		var username = document.getElementById("usernameInput").value;
-		var password = document.getElementById("passwordInput").value;
-                var xhttp = new XMLHttpRequest();
-		var result = "";
-                xhttp.onreadystatechange = function() {
-                    if (xhttp.readyState == 4 && xhttp.status == 200) {
-			result = xhttp.responseText;
-			if(result === "success") {
-			    window.location.replace("game.php");
-			} else {
-			    document.getElementById("response").innerHTML = "Failed to log in. Please try again";
-			}
-                    }
-                };
-                xhttp.open("POST", "login.php", true);
-		xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-                xhttp.send("username=" + username + "&password=" + password);
-            }
-	    
-	</script>
+	<script type="text/javascript"  src="login.js"></script>
     </head>
 
     <body>
 	<div id="topBar">
 	    <h1>Welcome to <?php echo $companyName ?> </h1>
+	    
 	    <div id="login">
 		<form>
 		    <p>Login here or <a href="register.php">Register</a> now.</p>
