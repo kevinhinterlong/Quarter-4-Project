@@ -1,48 +1,63 @@
 <!DOCTYPE html>
-<!-- Kevin Hinterlong May 2, 2016 Quarter 4 Project -->
+<!-- Kevin Hinterlong May 4, 2016 Attempting to create a login page for a website -->
 <html>
     <head>
+	<?php include("config.php") ?>
 	<title>
-	    Welcome to the Game
+	<?php echo $companyName . " - Home" ?>
 	</title>
 
-	<link rel="stylesheet" type="text/css" href="gameStyle.css">
-	<script src="game.js"></script>
+	<style>
+	    #topBar {
+		background-color: #8080ff;
+		margin: 0;
+		padding: 1em;
+	    }
+
+	    #login input {
+		display: block;
+	    }
+	</style>
+	<script>
+	    function attemptLogin() {
+		var username = document.getElementById("usernameInput").value;
+		var password = document.getElementById("passwordInput").value;
+                var xhttp = new XMLHttpRequest();
+		var result = "";
+                xhttp.onreadystatechange = function() {
+                    if (xhttp.readyState == 4 && xhttp.status == 200) {
+			result = xhttp.responseText;
+			if(result === "success") {
+			    window.location.replace("game.php");
+			} else {
+			    document.getElementById("response").innerHTML = "Failed to log in. Please try again";
+			}
+                    }
+                };
+                xhttp.open("POST", "login.php", true);
+		xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                xhttp.send("username=" + username + "&password=" + password);
+            }
+	    
+	</script>
     </head>
 
-    <body onload="initialize()">
-	<h1>Game of Craps</h1>
-	
-	<div id="menuBar">
-	    <a href="index.php">Home</a>
-	    <a href="leaderboards.php">Leaderboards</a>
-	    <a href="instructions.php">Instructions</a>
+    <body>
+	<div id="topBar">
+	    <h1>Welcome to <?php echo $companyName ?> </h1>
+	    <div id="login">
+		<form>
+		    <p>Login here or <a href="register.php">Register</a> now.</p>
+		    <input type="text" placeholder="username" name="username" id="usernameInput">
+		    <input type="password" placeholder="password" name="password" id="passwordInput">
+		    <input type="button" value="Submit" onclick="attemptLogin()">
+		</form>
+	    </div>
 	</div>
-	
-<!-- thing for the input  -->
-	<div id="gameInput">
-	    <h2 id="gameCounter">Current Game</h2>
-	    <form id="gameForm">
-		Games to play: <input type="text" placeholder="1" name="gamesToPlay"> <br />
-		Roll 1: <input type="text" name="dice1" disabled> <br />
-		Roll 2: <input type="text" name="dice2" disabled> <br />
-		Sum: <input type="text" name="sum" disabled> <br />
-		First Roll Sum: <input type="text" name="firstRollSum" disabled> <br />
-		<input type="button" value="Start Game" name="submit">
-	    <form>
-	</div>
-
-	<div id="game">
-	    <canvas id="gameCanvas" height="300" width="400"></canvas>
-	</div>
-	
-<!-- one thing for the stats  -->
-	<div id="gameStats">
-	    <canvas id="statsCanvas"></canvas>
-	</div>
-
-	<div id="instructions">
-	    <canvas id="instructionsCanvas"></canvas>
+    
+	<div id="content"> 
+	    <div id="response">
+	    </div>
 	</div>
     </body>
 </html>

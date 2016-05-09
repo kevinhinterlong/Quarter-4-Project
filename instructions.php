@@ -14,7 +14,7 @@
 	<h1>Game of Craps</h1>
 	
 	<div id="menuBar">
-	    <a href="index.php">Home</a>
+	    <a href="game.php">Home</a>
 	    <a href="leaderboards.php">Leaderboards</a>
 	    <a href="instructions.php">Instructions</a>
 	</div>
