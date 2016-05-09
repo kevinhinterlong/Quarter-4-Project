@@ -1,0 +1,61 @@
+#menuBar {
+    background-color: #8080ff;
+    display: inline-block;
+    padding: .5em 0;
+    width: 100%;
+}
+
+#menuBar a {
+    margin: .5em;
+    background-color: #b0b0ff;
+    font-size: 14pt;
+}
+
+#menuBar a:hover {
+    background-color:#000000;
+}
+
+canvas {
+    border-radius: 10px;
+    border: 1px black solid;
+}
+
+#game {
+    position: absolute;
+    right:0%;
+    left:2%;
+    top:25%;
+    bottom:0;
+    margin: auto;
+}
+
+#instructions {
+    position: absolute;
+    right:0%;
+    left:75%;
+    top:25%;
+    bottom:0;
+    margin: auto;
+
+}
+
+#gameStats {
+    position: absolute;
+    right:0%;
+    left:75%;
+    top:60%;
+    bottom:0;
+    margin: auto;
+
+}
+
+#gameInput {
+    position: absolute;
+    right:0%;
+    left:45%;
+    top:40%;
+    bottom:0;
+    margin: auto;
+    z-index: 1
+
+}
