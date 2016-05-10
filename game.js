@@ -1,6 +1,7 @@
 var dice1 = 0;
 var dice2 = 0;
 var firstRoll = 0;
+var gamesPlayed =0;
 var gamesToPlay =0;
 var turn =0;
 var wins =0;
@@ -83,12 +84,25 @@ function hasResults() {
     return gameFinished;
 }
 
+function resetGame() {
+    turn=0;
+    dice1=0;
+    dice2=0;
+    firstRoll=0;
+    wins =0;
+    losses=0;
+    gamesToPlay =0;
+    gamesPlayed=0;
+    clearValues();
+}
+
 function gameManager() {
+    resetGame();
     gamesToPlay = parseInt(gameForm.elements["gamesToPlay"].value);
     if(isNaN(gamesToPlay) || gamesToPlay <1) {
 	return;
     }
-    turn=0;
+    gamesPlayed = gamesToPlay;
     setButtonListener(waitForUserInput,"Roll Again");
     waitForUserInput();
 }
@@ -125,6 +139,8 @@ function waitForUserInput() {
     }
     
     if(finished && gamesToPlay == 0) {
+	//game is over, submit scores to database?
+	submitScores();
 	setButtonListener(gameManager,"Start Game");
 	return;
     } else if (finished && gamesToPlay > 0) {
@@ -132,3 +148,20 @@ function waitForUserInput() {
     }
 }
 
+function submitScores() {
+    var xhttp = new XMLHttpRequest();
+    var result = "";
+    xhttp.onreadystatechange = function() {
+	if (xhttp.readyState == 4 && xhttp.status == 200) {
+	    result = xhttp.responseText;
+	    if(result === "success") {
+		alert("Scores saved");
+	    } else {
+		alert(result);
+	    }
+	}
+    };
+    xhttp.open("POST", "scores.php", true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send("wins=" + wins + "&losses=" + losses + "&gamesPlayed=" + gamesPlayed + "&method=submitScores");
+}
