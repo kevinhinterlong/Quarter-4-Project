@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Kevin Hinterlong May 4, 2016 Attempting to create a login page for a website -->
+<!-- Kevin Hinterlong May 4, 2016 This page allows people to register into the database so that they can log in -->
 <html>
     <head>
 	<?php include("config.php") ?>

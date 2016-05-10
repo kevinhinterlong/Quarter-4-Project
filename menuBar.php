@@ -1,3 +1,4 @@
+<!-- This is the menubar to be used on all/most pages so it is placed in a php page and is then included -->
 <div id="menuBar">
     <a href="home.php">Home</a>
     <a href="game.php">Game</a>
