@@ -29,7 +29,7 @@
 	    include("scores.php");
 	    $conn = getConnection();    
 	    $sqlconfig = include("sql_config.php");
-	    $sql = "SELECT * FROM {$sqlconfig["leaderboardsTable"]} ORDER BY `gamesPlayed` ASC";
+	    $sql = "SELECT * FROM {$sqlconfig["leaderboardsTable"]} ORDER BY `gamesPlayed` DESC";
 	    $result = $conn->query($sql);
 	    if($result->num_rows > 0) {
 		echo '<table id="leaderboards">';
