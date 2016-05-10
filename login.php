@@ -25,6 +25,7 @@
     } else if($_POST["method"] == "register"){
 	if($userDetails->num_rows == 0 && trim($username) != "" && ctype_space($username) == false) {
 	    register($conn,$username,$password);
+	    login($conn,$username,$password);
 	} else {
 	    echo "Your username is bad or that account already exists. sorry";
 	}

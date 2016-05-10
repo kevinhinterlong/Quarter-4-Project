@@ -64,3 +64,23 @@ canvas {
     float:right;
     padding-right: 1em;
 }
+
+#topBar {
+    background-color: #8080ff;
+    margin: 0;
+    padding: 1em;
+}
+
+#login input {
+    display: block;
+}
+
+#login {
+    position:absolute;
+    top:30%;
+    right:0;
+    left:40%;
+    bottom:0;
+    margin:auto;
+}
+

@@ -8,3 +8,7 @@
 #leaderboards {
     text-align: center;
 }
+
+#leaderboards .currentUser {
+    background-color: yellow;
+}

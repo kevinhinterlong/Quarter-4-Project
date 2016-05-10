@@ -7,17 +7,7 @@
 	<?php echo $companyName; ?> - Login
 	</title>
 
-	<style>
-	    #topBar {
-		background-color: #8080ff;
-		margin: 0;
-		padding: 1em;
-	    }
-
-	    #login input {
-		display: block;
-	    }
-	</style>
+	<link rel="stylesheet" type="text/css" href="gameStyle.css">
 	<script type="text/javascript"  src="login.js"></script>
     </head>
 

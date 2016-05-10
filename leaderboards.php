@@ -42,7 +42,8 @@
 		echo "</tr>"; 
 		$i=1;
 	        while($row = $result->fetch_assoc()) {
-		    echo "<tr>";
+		    $class = $_SESSION["username"] == $row["userName"] ? "currentUser" : "";
+		    echo "<tr class='$class'>";
 		    echo '<td class="position"> ' . $i++ . "</td>";
 		    echo '<td class="username"> ' . $row["userName"] . "</td>";
 		    echo '<td class="wins"> ' . $row["wins"] . "</td>";
@@ -56,13 +57,5 @@
 	    }
 
 	?>
-<!-- 
-    create database if not exists leaderboards
-    use database
-    create table if not exists
-    select * from table asc
-    for each value, print name and score
-    maybe show stats about leaderboards?    
--->
     </body>
 </html>
