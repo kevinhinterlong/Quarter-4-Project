@@ -1,5 +1,5 @@
+//Tell the server to logout the current user
 function logout() {
-    //get game stats?
     var xhttp = new XMLHttpRequest();
     var result = "";
     xhttp.onreadystatechange = function() {
@@ -15,6 +15,8 @@ function logout() {
     xhttp.send("method=logout");
 }
 
+//attempt to login the current username with the current password
+//this is basically the same as attemptRegister() except that it redirects to game.php on successful login
 function attemptLogin() {
     var username = document.getElementById("usernameInput").value;
     var password = document.getElementById("passwordInput").value;
@@ -35,16 +37,17 @@ function attemptLogin() {
     xhttp.send("username=" + username + "&password=" + password);
 }
 
-//check if name is available
+//check with the server to see if a username is avialable
 function checkName() {
     attemptRegister("attemptRegister");
 }
 
-//actually register
+//actually register the user
 function register() {
     attemptRegister("register");
 }
 
+//used to see if a name is available and 
 function attemptRegister(mode) {
     var username = document.getElementById("usernameInput").value;
     var password = document.getElementById("passwordInput").value;
@@ -62,6 +65,7 @@ function attemptRegister(mode) {
     }
 }
 
+//check if a string has whitespace with regex
 function hasWhiteSpace(s) {
     return /\s/g.test(s);
 }

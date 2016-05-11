@@ -1,3 +1,9 @@
+//global variables to use when playing the game
+//NOTE: this game goes on an honors system
+//such that the site doesn't do anything to 
+//attempt to track the variables. In other words
+//you can set the number of wins to whatever you like.
+//Just try it
 var dice1 = 0;
 var dice2 = 0;
 var firstRoll = 0;
@@ -7,18 +13,21 @@ var turn =0;
 var wins =0;
 var losses =0;
 
+//sets the function for the button, gets the game form, and prints the instructions
 function initialize() {
     var gameForm = document.getElementById("gameForm");
     printInstructions();
     setButtonListener(gameManager);
 }
 
+//tells the button what it should do onclick
 function setButtonListener(onClickFunction, buttonText) {
     var submitButton = gameForm.elements["submit"];
     buttonText !== undefined ? submitButton.value = buttonText : 0;
     submitButton.onclick = onClickFunction;
 }
 
+//print the number of games played, won, and lost
 function printStats() {
     var canvas = document.getElementById("statsCanvas"); 
     var context = canvas.getContext("2d");
@@ -36,6 +45,7 @@ function printStats() {
 
 }   
 
+//print the instructions to the game
 function printInstructions() {
     var canvas = document.getElementById("instructionsCanvas");
     var context = canvas.getContext("2d");
@@ -51,10 +61,13 @@ function printInstructions() {
     }
 }
 
+//gets the sum of the dice
 function getSum() {
     return dice1+ dice2;
 }
 
+//gets a random variable for each dice
+//and records the sum if it is the first roll
 function rollDice() {
     dice1 = getRoll();
     dice2 = getRoll();
@@ -63,32 +76,36 @@ function rollDice() {
     }
 }
 
+//returns random integer from 1-6 inclusive
 function getRoll() {
     return Math.floor(Math.random()*6)+1;
 }
 
+//checks if the user lost the roll
 function lostRoll() {
     var sum = getSum();
-    if(turn == 0 && (sum == 2 || sum == 3 || sum == 12)) {
+    if(turn == 0 && (sum == 2 || sum == 3 || sum == 12)) { //first turn
 	return true;
-    } else if(turn > 0 && sum ==7) {
+    } else if(turn > 0 && sum ==7) { //following turns
 	return true;
     } else {
 	return false;
     }
 }
 
+//checks if the user won the roll
 function wonRoll() {
     var sum = getSum();
-    if(turn == 0 && (sum ==7 || sum ==11)){
+    if(turn == 0 && (sum ==7 || sum ==11)){ //first turn
 	return true;
-    } else if (turn > 0 && sum == firstRoll) {
+    } else if (turn > 0 && sum == firstRoll) { //following turns
 	return true;
     } else {
         return false;
     }
 }
 
+//checks if the user won or lost and returns true when the game is finished
 function hasResults() {
     var gameFinished = false;
     if(wonRoll()) {
@@ -101,6 +118,7 @@ function hasResults() {
     return gameFinished;
 }
 
+//clears all the values for the game
 function resetGame() {
     turn=0;
     dice1=0;
@@ -113,6 +131,8 @@ function resetGame() {
     clearValues();
 }
 
+//sets the function for the button and the number of games to play
+//then the button is used to advance the game
 function gameManager() {
     resetGame();
     printStats();
@@ -125,6 +145,7 @@ function gameManager() {
     waitForUserInput();
 }
 
+//set all of the values which are displayed on the screen
 function updateValues() {
     gameForm.elements["dice1"].value = dice1;
     gameForm.elements["dice2"].value = dice2;
@@ -132,6 +153,7 @@ function updateValues() {
     gameForm.elements["firstRollSum"].value = firstRoll;
 }
 
+//clears all of the values which are displayed on the screen
 function clearValues() {
     gameForm.elements["dice1"].value = '';
     gameForm.elements["dice2"].value = '';
@@ -139,10 +161,12 @@ function clearValues() {
     gameForm.elements["firstRollSum"].value = '';
 }
 
+//updates the number of games to play in the form
 function setGamesToPlay() {
     gamesToPlay = gameForm.elements["gamesToPlay"].value = gamesToPlay;
 }
 
+//how much the dice should be shifted horizontally when drawn
 function getShift(dice) {
     switch(dice) {
 	case 0:
@@ -155,6 +179,7 @@ function getShift(dice) {
     return 0;
 }
 
+//returns an int[][] with the circles to be drawn as 1 and blanks as 0
 function getCircles(value) {
     var circles;
     switch(value) {
@@ -180,18 +205,20 @@ function getCircles(value) {
     return circles;
 }
 
+//draws a single dice on the canvas
 function drawDice(dice,value,context) {
-    var verticalShift = 80;
-    var radius = 5;
-    var color = dice == 0 ? "blue" : "red";
-    var horizontalShift = getShift(dice);
-    var circlesToDraw = getCircles(value);
-    var diceSize = 120;
-    var spaceFromEdge = 15;
-    var spacingBetweenDots = (diceSize-2*spaceFromEdge)/2;
-    context.fillStyle = color;
-    context.fillRect(horizontalShift,verticalShift,diceSize,diceSize); 
-    context.fillStyle = "white";
+    var verticalShift = 80; //amount to be shifted down
+    var radius = 5; //radii of the cirles
+    var color = dice == 0 ? "blue" : "red"; //color for dice1 and dice2
+    var horizontalShift = getShift(dice); //how much to move horizontally
+    var circlesToDraw = getCircles(value); //find out what circles should be drawn
+    var diceSize = 120; //the vertical and horizontal size of the dice
+    var spaceFromEdge = 15; //how much the cirlces should be moved away from the edges
+    var spacingBetweenDots = (diceSize-2*spaceFromEdge)/2; //spacing to be set between dots
+    context.fillStyle = color; //set color of dice
+    context.fillRect(horizontalShift,verticalShift,diceSize,diceSize);  //draw dice
+    context.fillStyle = "white"; //set color of circles
+    //draws in all the circles
     for(var i=0; i < circlesToDraw.length; ++i) {
 	for(var j=0; j < circlesToDraw[i].length; ++j) {
 	    if(circlesToDraw[j][i] == 1) {
@@ -203,6 +230,7 @@ function drawDice(dice,value,context) {
     }
 }
 
+//gets the game canvas and clears it then draws both dice
 function animateDie() {
     //clear canvas
     var canvas = document.getElementById("gameCanvas");
@@ -212,31 +240,32 @@ function animateDie() {
     drawDice(1,dice2,context);
 }
 
+//the button to be clicked while playing the game
 function waitForUserInput() {
-    rollDice();
-    updateValues();
-    animateDie();
-    var finished = hasResults();
-    if(finished) { //next game
-	printStats();
-	turn=0; //this modifies the behavior
-	gamesToPlay--;
-	setGamesToPlay();
-	alert("Game finished! The sum was " + getSum() );
-    } else {
-	++turn;
+    rollDice(); //roll dice
+    updateValues(); //update numbers shown
+    animateDie(); //update dice shown
+    var finished = hasResults(); //check if the game has ended
+    if(finished) { //if game ended
+	printStats(); //print stats
+	turn=0; //reset game
+	gamesToPlay--; //decrement games to play
+	setGamesToPlay(); //update the number of games to play on screen
+	alert("Game finished! The sum was " + getSum() ); //alert that the game has ended
+    } else { //if the game didn't end then increment the turns
+	++turn; 
     }
     
-    if(finished && gamesToPlay == 0) {
-	//game is over, submit scores to database?
-	submitScores();
-	setButtonListener(gameManager,"Start Game");
+    if(finished && gamesToPlay == 0) { //if the last game finished
+	submitScores(); //submit scores to database
+	setButtonListener(gameManager,"Start Game"); //reset the button to starting games
 	return;
-    } else if (finished && gamesToPlay > 0) {
-	clearValues();
+    } else if (finished && gamesToPlay > 0) { //if game finished, but there are more games
+	clearValues(); 
     }
 }
 
+//send the scores to be saved into the database
 function submitScores() {
     var xhttp = new XMLHttpRequest();
     var result = "";

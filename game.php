@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<!-- Kevin Hinterlong May 2, 2016 Quarter 4 Project -->
+<!-- Kevin Hinterlong May 2, 2016 Page which features the game of craps and automatic score submission -->
 <html>
 <?php
+    //start session
     session_start();
     if(isset($_SESSION['username']) && $_POST["action"] == "logout") {
 	session_destroy();
     }
-    if(!isset($_SESSION['username'])){
+    if(!isset($_SESSION['username'])){//only allow logged in users
 	header("Location:index.php");
     }
     include("config.php");
@@ -29,7 +30,7 @@
 	<?php 
 	    include("menuBar.php");
 	?>	
-<!-- thing for the input  -->
+<!-- form for the input to the game -->
 	<div id="gameInput">
 	    <h2 id="gameCounter">Play Game</h2>
 	    <form id="gameForm">
@@ -46,11 +47,12 @@
 	    <canvas id="gameCanvas" height="300" width="400"></canvas>
 	</div>
 	
-<!-- one thing for the stats  -->
+<!-- canvas for the stats  -->
 	<div id="gameStats">
 	    <canvas id="statsCanvas"></canvas>
 	</div>
 
+<!-- canvas for the instructions  -->
 	<div id="instructions">
 	    <canvas id="instructionsCanvas"></canvas>
 	</div>

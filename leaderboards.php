@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<!-- Kevin Hinterlong May 2, 2016 Quarter 4 Project -->
+<!-- Kevin Hinterlong May 2, 2016 Shows the leaderboards for the game of craps -->
 <html>
 <?php
+    //start the session
     session_start();
-    if(isset($_SESSION['username']) && $_POST["action"] == "logout") {
+    if(isset($_SESSION['username']) && $_POST["action"] == "logout") { //logout
 	session_destroy();
     }
     include("config.php");
@@ -32,16 +33,19 @@
 	    $sql = "SELECT * FROM {$sqlconfig["leaderboardsTable"]} ORDER BY `gamesPlayed` DESC";
 	    $result = $conn->query($sql);
 	    if($result->num_rows > 0) {
+		//prints out the header for the table
 		echo '<table id="leaderboards">';
 		echo "<tr>";
-		echo '<td class="position"> ' . "position" . "</td>";
-		echo '<td class="username"> ' . "username" . "</td>";
-		echo '<td class="wins"> ' . "wins" . "</td>";
-		echo '<td class="losses"> ' . "losses" . "</td>";
-		echo '<td class="gamesPlayed"> ' . "games played" . "</td>";
+		echo '<th class="position"> ' . "position" . "</th>";
+		echo '<th class="username"> ' . "username" . "</th>";
+		echo '<th class="wins"> ' . "wins" . "</th>";
+		echo '<th class="losses"> ' . "losses" . "</th>";
+		echo '<th class="gamesPlayed"> ' . "games played" . "</th>";
 		echo "</tr>"; 
 		$i=1;
-	        while($row = $result->fetch_assoc()) {
+		//print out all the users
+		while($row = $result->fetch_assoc()) {
+		    //highlight if current user is on the leaderboard
 		    $class = $_SESSION["username"] == $row["userName"] ? "currentUser" : "";
 		    echo "<tr class='$class'>";
 		    echo '<td class="position"> ' . $i++ . "</td>";

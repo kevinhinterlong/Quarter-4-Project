@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Kevin Hinterlong May 4, 2016 Attempting to create a login page for a website -->
+<!-- Kevin Hinterlong May 4, 2016 login page for the game of craps -->
 <html>
     <head>
 	<?php include("config.php") ?>
