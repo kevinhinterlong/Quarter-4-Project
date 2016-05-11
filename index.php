@@ -18,15 +18,24 @@
 	    
 	    <div id="login">
 		<form>
-		    <p>Login here or <a href="register.php">Register</a> now.</p>
+		    <p>Login or Register now.</p>
 		    <input type="text" placeholder="username" name="username" id="usernameInput">
 		    <input type="password" placeholder="password" name="password" id="passwordInput">
-		    <input type="button" value="Submit" onclick="attemptLogin()">
+		    <input type="button" value="Login" onclick="attemptLogin()">
 		    <input type="button" id="register" value="Register" onclick="attemptRegister('register')">
 		</form>
 	    </div>
 	</div>
     
+	<?php 
+	    if(isset($_SESSION["username"])) {
+		include("menuBar.php");
+	    } else {
+		include("nonUserMenuBar.php");
+	    }
+	?>	
+
+
 	<div id="content"> 
 	    <div id="response">
 	    </div>

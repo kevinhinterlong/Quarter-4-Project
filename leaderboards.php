@@ -22,7 +22,11 @@
     <body>
 	<h1>Game of Craps</h1>
 	<?php 
-	    include("menuBar.php");
+	    if(isset($_SESSION["username"])) {
+		include("menuBar.php");
+	    } else {
+		include("nonUserMenuBar.php");
+	    }
 	?>	
 
 	<?php
@@ -45,7 +49,10 @@
 		//print out all the users
 		while($row = $result->fetch_assoc()) {
 		    //highlight if current user is on the leaderboard
-		    $class = $_SESSION["username"] == $row["userName"] ? "currentUser" : "";
+		    $class = "";
+		    if(isset($_SESSION["username"])) {
+			$class = $_SESSION["username"] == $row["userName"] ? "currentUser" : "";
+		    }
 		    echo "<tr class='$class'>";
 		    echo '<td class="position"> ' . $i++ . "</td>";
 		    echo '<td class="username"> ' . $row["userName"] . "</td>";

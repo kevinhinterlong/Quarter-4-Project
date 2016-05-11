@@ -1,20 +1,27 @@
 <?php
     //start session
-    session_start();
     if(isset($_SESSION['username']) && $_POST["action"] == "logout") {
 	session_destroy();
     }
-    if(!isset($_SESSION['username'])){
-	header("Location:index.php");
-    }
-
 
     //import variables
-    $wins = $_POST["wins"];
-    $losses = $_POST["losses"];
-    $gamesPlayed = $_POST["gamesPlayed"];
-    $method = $_POST["method"]; //some error when retrieving the method because it doesn't always exist
+    if(isset($_POST["wins"])) {
+	$wins = $_POST["wins"];
+    }
+    if(isset($_POST["losses"])) {
+	$losses = $_POST["losses"];
+    }
+    if(isset($_POST["gamesPlayed"])) {
+	$gamesPlayed = $_POST["gamesPlayed"];
+    }
+    $method = "";
+    if(isset($_POST["method"])) {
+	$method = $_POST["method"];
+    }
 
+    if(!isset($_SESSION['username']) && $action == "submitScores"){
+	header("Location:index.php");
+    }
 
     //get a connection to the database
     $conn = getConnection();
