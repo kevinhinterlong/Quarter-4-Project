@@ -84,3 +84,19 @@ canvas {
     margin:auto;
 }
 
+#leaderboards tr {
+}
+
+#leaderboards td {
+    padding: .25em 3em;
+}
+
+#leaderboards {
+    text-align: center;
+}
+
+#leaderboards .currentUser {
+    background-color: yellow;
+}
+
+

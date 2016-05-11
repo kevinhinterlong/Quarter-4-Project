@@ -15,7 +15,6 @@
 	</title>
 
 	<link rel="stylesheet" type="text/css" href="gameStyle.css">
-	<link rel="stylesheet" type="text/css" href="leaderboards.css">
 	
 	<script type="text/javascript" src="login.js"></script>
     </head>
